@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Time-stamp: <2019-07-31 13:50:22 kmodi>
+# Time-stamp: <2019-07-31 13:53:44 kmodi>
 
 EMACS="${EMACS:-emacs}"
 echo "Emacs version:"
@@ -63,6 +63,7 @@ grep 'def' "${file1}" | ELESS_TEST="pipein_grep" "${ELESS}"
 ELESS_DISABLE_SNAP=1 "${ELESS}" -h | ELESS_TEST="pipein_help" "${ELESS}"
 
 eval "info grep | ELESS_TEST=pipein_info ELESS_TEST_SNAP_NO_CONTENT=1 ${ELESS} -D"
+eval "info emacs | ELESS_TEST=pipein_info ELESS_TEST_SNAP_NO_CONTENT=1 ${ELESS} -D"
 
 
 ELESS_TEST="man" ELESS_TEST_SNAP_NO_CONTENT=1 PAGER="${eless_repo_root}/eless" man ls
