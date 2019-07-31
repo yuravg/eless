@@ -565,6 +565,8 @@ else
         # GNU grep -- not available by default on macOS):
         #   grep -Po '^([A-Za-z-_]+\([0-9]+\))(?=\s+.*?\1$)'
 
+        debug "man_page (1) = \`${man_page}'"
+
         # If it's not a regular man page, check if it's a Perl man page.
         if [[ -z ${man_page} ]]
         then
@@ -579,6 +581,8 @@ else
                            | perl -pe 's/^[A-Z0-9-_]+::[A-Z0-9-_]+$/\L$_/' \
                            || true)
         fi
+
+        debug "man_page (2) = \`${man_page}'"
 
         # The first line of Python package MODULE help is assumed to be
         #   "Help on package MODULE:" OR "Help on module MODULE:" OR "Help on SOMETHING in module MODULE:"
@@ -602,6 +606,8 @@ else
         # GNU grep -- not available by default on macOS):
         #   grep -Po '^(.*/)*\K[^/]+(?=\.info(\-[0-9]+)*(\.gz)*$)'
 
+        debug "info_man (1) = \`${info_man}'"
+
         # If an Info manual is not detected by the above regex, try the below regex
         # that works with info 6.5.  Apparently the string in the first line of
         # info-returned buffer changed in info 6.5.
@@ -616,8 +622,7 @@ else
                            || true)
         fi
 
-        debug "man_page = ${man_page}"
-        debug "info_man = ${info_man}"
+        debug "info_man (2) = \`${info_man}'"
 
         if [[ -n ${man_page} ]]
         then
