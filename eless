@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Version: v0.6-8-g1a39e2a
+# Version: v0.6-9-g6dca21f
 
 # This script uses the unofficial strict mode as explained in
 # http://redsymbol.net/articles/unofficial-bash-strict-mode
@@ -10,7 +10,7 @@
 # This file is tangled from https://github.com/kaushalmodi/eless/blob/master/eless.org
 #   Do NOT edit this manually.
 
-eless_version='v0.6-8-g1a39e2a'
+eless_version='v0.6-9-g6dca21f'
 
 h="
 Script to run emacs in view-mode with some sane defaults in attempt to replace
@@ -502,11 +502,13 @@ function emacs_Q_view_mode {
                                              (or (expand-file-name cfg-file (concat home ".emacs.d"))
                                                  (expand-file-name cfg-file home))))))
                           (unless (load cfg-path :noerror)
-                            (load-theme (quote tango-dark) :no-confirm)
+                            (if (eq system-type (quote windows-nt))
+                                (load-theme (quote tsdh-dark) :no-confirm)
+                              (load-theme (quote whiteboard) :no-confirm))
                             ;; The tango-dark theme is good except for the bright yellow hl-line face
                             (custom-theme-set-faces
                              (quote user)
-                             (quote (hl-line ((t (:background "color-238")))))
+                             (quote (hl-line ((t (:background "lightgray")))))
                              (quote (Man-overstrike ((t (:foreground "#f3dc55" :weight normal)))))))) ;gold yellow
                      )' 2>/dev/null </dev/tty
 }

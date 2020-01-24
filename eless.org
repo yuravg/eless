@@ -332,7 +332,7 @@ git describe --tags HEAD
 #+end_src
 #+results:
 #+begin_src shell :noweb-ref git-describe-string
-v0.6-8-g1a39e2a
+v0.6-9-g6dca21f
 #+end_src
 This commit hash was retrieved before (obviously) the commit was made
 where you see this. So if you see a commit hash when checking =eless=
@@ -1305,11 +1305,13 @@ key-bindings in this file.
                      (or (expand-file-name cfg-file (concat home ".emacs.d"))
                          (expand-file-name cfg-file home))))))
   (unless (load cfg-path :noerror)
-    (load-theme (quote tango-dark) :no-confirm)
+    (if (eq system-type (quote windows-nt))
+        (load-theme (quote tsdh-dark) :no-confirm)
+      (load-theme (quote whiteboard) :no-confirm))
     ;; The tango-dark theme is good except for the bright yellow hl-line face
     (custom-theme-set-faces
      (quote user)
-     (quote (hl-line ((t (:background "color-238")))))
+     (quote (hl-line ((t (:background "lightgray")))))
      (quote (Man-overstrike ((t (:foreground "#f3dc55" :weight normal)))))))) ;gold yellow
 #+end_src
 **** Using user's ~custom-file~
