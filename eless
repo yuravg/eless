@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Version: v0.6-7-gf2bdb03
+# Version: v0.6-8-g1a39e2a
 
 # This script uses the unofficial strict mode as explained in
 # http://redsymbol.net/articles/unofficial-bash-strict-mode
@@ -10,7 +10,7 @@
 # This file is tangled from https://github.com/kaushalmodi/eless/blob/master/eless.org
 #   Do NOT edit this manually.
 
-eless_version='v0.6-7-gf2bdb03'
+eless_version='v0.6-8-g1a39e2a'
 
 h="
 Script to run emacs in view-mode with some sane defaults in attempt to replace
@@ -478,6 +478,8 @@ function emacs_Q_view_mode {
                         (global-set-key (kbd "C-x C-c") (function eless/save-buffers-maybe-and-kill-emacs))
                         (global-set-key (kbd "C-x C-f") (function view-file))
                         (global-set-key (kbd "C-c q") (function query-replace-regexp))
+                        (global-set-key (kbd "C-c C-m") (function execute-extended-command))
+                        (global-set-key (kbd "M-v") (function scroll-down-command))
                         (global-set-key (kbd "<f5>") (function eless/revert-buffer-retain-view-mode))
 
                         (when (display-graphic-p)

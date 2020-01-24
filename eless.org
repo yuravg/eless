@@ -332,7 +332,7 @@ git describe --tags HEAD
 #+end_src
 #+results:
 #+begin_src shell :noweb-ref git-describe-string
-v0.6-7-gf2bdb03
+v0.6-8-g1a39e2a
 #+end_src
 This commit hash was retrieved before (obviously) the commit was made
 where you see this. So if you see a commit hash when checking =eless=
@@ -1269,6 +1269,8 @@ eless bar.tar.gz
 (global-set-key (kbd "C-x C-c") (function eless/save-buffers-maybe-and-kill-emacs))
 (global-set-key (kbd "C-x C-f") (function view-file))
 (global-set-key (kbd "C-c q") (function query-replace-regexp))
+(global-set-key (kbd "C-c C-m") (function execute-extended-command))
+(global-set-key (kbd "M-v") (function scroll-down-command))
 (global-set-key (kbd "<f5>") (function eless/revert-buffer-retain-view-mode))
 
 (when (display-graphic-p)
