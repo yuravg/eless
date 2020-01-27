@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Version: v0.6-9-g6dca21f
+# Version: v0.6-10-gaad0db2
 
 # This script uses the unofficial strict mode as explained in
 # http://redsymbol.net/articles/unofficial-bash-strict-mode
@@ -10,7 +10,7 @@
 # This file is tangled from https://github.com/kaushalmodi/eless/blob/master/eless.org
 #   Do NOT edit this manually.
 
-eless_version='v0.6-9-g6dca21f'
+eless_version='v0.6-10-gaad0db2'
 
 h="
 Script to run emacs in view-mode with some sane defaults in attempt to replace
@@ -508,7 +508,9 @@ function emacs_Q_view_mode {
                             ;; The tango-dark theme is good except for the bright yellow hl-line face
                             (custom-theme-set-faces
                              (quote user)
-                             (quote (hl-line ((t (:background "lightgray")))))
+                             (if (eq system-type (quote windows-nt))
+                                 (quote (hl-line ((t (:background "blue")))))
+                               (quote (hl-line ((t (:background "lightgray"))))))
                              (quote (Man-overstrike ((t (:foreground "#f3dc55" :weight normal)))))))) ;gold yellow
                      )' 2>/dev/null </dev/tty
 }
