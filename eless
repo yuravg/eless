@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Version: v0.7
+# Version: v0.7-4-g786441b
 
 # This script uses the unofficial strict mode as explained in
 # http://redsymbol.net/articles/unofficial-bash-strict-mode
@@ -10,7 +10,7 @@
 # This file is tangled from https://github.com/kaushalmodi/eless/blob/master/eless.org
 #   Do NOT edit this manually.
 
-eless_version='v0.7'
+eless_version='v0.7-4-g786441b'
 
 h="
 Script to run emacs in view-mode with some sane defaults in attempt to replace
@@ -479,6 +479,8 @@ function emacs_Q_view_mode {
                         (global-set-key (kbd "C-x C-c") (function eless/save-buffers-maybe-and-kill-emacs))
                         (global-set-key (kbd "C-x C-f") (function view-file))
                         (global-set-key (kbd "C-c q") (function query-replace-regexp))
+                        (global-set-key (kbd "C-c C-m") (function execute-extended-command))
+                        (global-set-key (kbd "M-v") (function scroll-down-command))
                         (global-set-key (kbd "<f5>") (function eless/revert-buffer-retain-view-mode))
 
                         (when (display-graphic-p)
@@ -501,11 +503,15 @@ function emacs_Q_view_mode {
                                              (or (expand-file-name cfg-file (concat home ".emacs.d"))
                                                  (expand-file-name cfg-file home))))))
                           (unless (load cfg-path :noerror)
-                            (load-theme (quote tango-dark) :no-confirm)
+                            (if (eq system-type (quote windows-nt))
+                                (load-theme (quote tsdh-dark) :no-confirm)
+                              (load-theme (quote whiteboard) :no-confirm))
                             ;; The tango-dark theme is good except for the bright yellow hl-line face
                             (custom-theme-set-faces
                              (quote user)
-                             (quote (hl-line ((t (:background "color-238")))))
+                             (if (eq system-type (quote windows-nt))
+                                 (quote (hl-line ((t (:background "blue")))))
+                               (quote (hl-line ((t (:background "lightgray"))))))
                              (quote (Man-overstrike ((t (:foreground "#f3dc55" :weight normal)))))))) ;gold yellow
                      )' 2>/dev/null </dev/tty
 }
